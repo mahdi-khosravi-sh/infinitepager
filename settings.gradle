@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "InfinitePager"
 include ':app'
+include ':infinitepager'
