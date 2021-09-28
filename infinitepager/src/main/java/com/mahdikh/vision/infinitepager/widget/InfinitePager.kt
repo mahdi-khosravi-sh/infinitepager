@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.mahdikh.vision.infinitepager.R
 import kotlin.math.max
 
-class InfinitePager : ViewPager {
+open class InfinitePager : ViewPager {
     private var callbacks: MutableList<Callback>? = null
     private var pagerItemCount = 0
     private var adapterItemCount = 0
