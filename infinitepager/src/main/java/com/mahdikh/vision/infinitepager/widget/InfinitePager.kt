@@ -22,11 +22,7 @@ class InfinitePager : ViewPager {
             positionOffset: Float,
             positionOffsetPixels: Int
         ) {
-            dispatchOnPageScrolled(
-                position,
-                positionOffset,
-                positionOffsetPixels
-            )
+            dispatchOnPageScrolled(position, positionOffset, positionOffsetPixels)
         }
 
         override fun onPageSelected(position: Int) {
@@ -57,11 +53,7 @@ class InfinitePager : ViewPager {
                     }
                 }
             }
-            dispatchOnPageSelected(
-                (adapter as InfiniteAdapter).getAdapterPosition(
-                    position
-                )
-            )
+            dispatchOnPageSelected(getAdapterPosition(position))
         }
 
         override fun onPageScrollStateChanged(state: Int) {
@@ -108,6 +100,10 @@ class InfinitePager : ViewPager {
         }
     }
 
+    override fun getAdapter(): InfiniteAdapter? {
+        return super.getAdapter() as InfiniteAdapter?
+    }
+
     override fun setAdapter(adapter: PagerAdapter?) {
         getAdapter()?.unregisterDataSetObserver(observer)
         if (adapter != null) {
@@ -124,11 +120,13 @@ class InfinitePager : ViewPager {
 
     private fun resetAdapter() {
         val a = adapter
-        adapterItemCount = (a as InfiniteAdapter).getItemCount()
-        pagerItemCount = a.count
-        val current = currentItem
-        super.setAdapter(a)
-        currentItem = current
+        if (a != null) {
+            adapterItemCount = a.getItemCount()
+            pagerItemCount = a.count
+            val current = currentItem
+            super.setAdapter(a)
+            currentItem = current
+        }
     }
 
     override fun setOffscreenPageLimit(limit: Int) {
@@ -144,8 +142,11 @@ class InfinitePager : ViewPager {
     }
 
     override fun getCurrentItem(): Int {
-        return (adapter as InfiniteAdapter?)?.getAdapterPosition(super.getCurrentItem())
-            ?: 0
+        return getAdapterPosition(super.getCurrentItem())
+    }
+
+    private fun getAdapterPosition(item: Int): Int {
+        return adapter?.getAdapterPosition(item) ?: 0
     }
 
     private fun jump() {
