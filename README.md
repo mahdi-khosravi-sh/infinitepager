@@ -4,7 +4,7 @@
 
 #
 
-[![](https://jitpack.io/v/mahdidev78/scrolltotop.svg)](https://jitpack.io/#mahdidev78/infinitepager)
+[![](https://jitpack.io/v/mahdidev78/infinitepager.svg)](https://jitpack.io/#mahdidev78/infinitepager)
 ![GitHub repo size](https://img.shields.io/github/repo-size/mahdidev78/infinitepager)
 ![GitHub language count](https://img.shields.io/github/languages/count/mahdidev78/infinitepager)
 ![GitHub top language](https://img.shields.io/github/languages/top/mahdidev78/infinitepager)
