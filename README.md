@@ -119,7 +119,7 @@ pager.adapter = adapter // extends InfiniteAdapter
     
 ```java
 InfinitePager pager = findViewById(R.id.infinitePager);
-pager.setAdapter(adapter); extends InfiniteAdapter
+pager.setAdapter(adapter); // extends InfiniteAdapter
 ```
   </li>
 </ul>
