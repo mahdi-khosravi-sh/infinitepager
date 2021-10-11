@@ -10,7 +10,7 @@ import com.mahdikh.vision.infinitepager.R
 import kotlin.math.max
 
 open class InfinitePager : ViewPager {
-    private var callbacks: MutableList<Callback>? = null
+    private var onPageChangeCallbacks: MutableList<OnPageChangeCallback>? = null
     private var pagerItemCount = 0
     private var adapterItemCount = 0
     private var jumpPosition = -1
@@ -175,7 +175,7 @@ open class InfinitePager : ViewPager {
         positionOffset: Float,
         positionOffsetPixels: Int
     ) {
-        callbacks?.let {
+        onPageChangeCallbacks?.let {
             val size = it.size
             for (i in 0 until size) {
                 it[i].onPageScrolled(position, positionOffset, positionOffsetPixels)
@@ -185,7 +185,7 @@ open class InfinitePager : ViewPager {
 
     private fun dispatchOnPageSelected(position: Int) {
         if (position in 0..adapterItemCount) {
-            callbacks?.let {
+            onPageChangeCallbacks?.let {
                 val size = it.size
                 for (i in 0 until size) {
                     it[i].onPageSelected(position)
@@ -195,7 +195,7 @@ open class InfinitePager : ViewPager {
     }
 
     private fun dispatchOnPageStateChanged(state: Int) {
-        callbacks?.let {
+        onPageChangeCallbacks?.let {
             val size = it.size
             for (i in 0 until size) {
                 it[i].onPageScrollStateChanged(state)
@@ -224,20 +224,20 @@ open class InfinitePager : ViewPager {
         )
     }
 
-    fun registerCallback(callback: Callback) {
-        if (callbacks == null) {
-            callbacks = mutableListOf()
+    fun registerCallback(onPageChangeCallback: OnPageChangeCallback) {
+        if (onPageChangeCallbacks == null) {
+            onPageChangeCallbacks = mutableListOf()
         }
-        callbacks?.add(callback)
+        onPageChangeCallbacks?.add(onPageChangeCallback)
     }
 
-    fun unregisterCallback(callback: Callback) {
-        callbacks?.remove(callback)
+    fun unregisterCallback(onPageChangeCallback: OnPageChangeCallback) {
+        onPageChangeCallbacks?.remove(onPageChangeCallback)
     }
 
     fun unregisterCallbacks() {
-        callbacks?.clear()
-        callbacks = null
+        onPageChangeCallbacks?.clear()
+        onPageChangeCallbacks = null
     }
 
     companion object {
